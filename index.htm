@@ -30,14 +30,23 @@ var amphyOT=[];
 DQ = [];
 
 for (let i = 0; i < zeraArray.length; i++) {
-  zeraOT[i] = zeraArray[i].split(",")[0].split(":")[1].trim();
+if(zeraArray[i].includes("Pending Trades")){
+continue;
+}
+  zeraOT.push(zeraArray[i].split(",")[0].split(":")[1].trim());
 }
 for (let i = 0; i < mewArray.length; i++) {
-  mewOT[i] = mewArray[i].split(",")[0].split(":")[1].trim();
+  if(mewArray[i].includes("Pending Trades")){
+	continue;
+  }
+  mewOT.push(mewArray[i].split(",")[0].split(":")[1].trim());
 }
 
 for (let i = 0; i < amphyArray.length; i++) {
-  amphyOT[i] = amphyArray[i].split(",")[0].split(":")[1].trim();
+  if(amphyArray[i].includes("Pending Trades")){
+	continue;
+  }
+  amphyOT.push(amphyArray[i].split(",")[0].split(":")[1].trim());
 }
 
 for (let i = 0; i < zeraOT.length; i++) {
