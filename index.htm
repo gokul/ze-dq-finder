@@ -1,97 +1,116 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>ZE DQ Finder</title>
+</head>
 <body>
-	<!-- BAD CODE IS BAD -->
+<!-- BAD CODE IS BAD -->
 
 <h1>ZE DQ finder 🐍</h1>
 
-<p><label for="zera"><b>Zera</b></label><br/><textarea cols="50" name="zera" rows="4" id="zera"></textarea> <br /><br /><label for="mew"><b>Mew</b></label><br/><textarea cols="50" name="mew" rows="4" id="mew"></textarea> <br /><br /><label for="amphy"><b>Amphy</b></label><br/><textarea cols="50" name="amphy" rows="4" id="amphy"></textarea></p>
-<p><button onclick="myFunction()">GO!</button></p>
+<h3> for $ql </h3>
+
+<p><label for="zera"><b>Zera</b></label><br/><textarea cols="50" name="zera" rows="4" id="zera"></textarea>
+    <br/><br/><label for="mew"><b>Mew</b></label><br/><textarea cols="50" name="mew" rows="4" id="mew"></textarea> <br/><br/><label
+            for="amphy"><b>Amphy</b></label><br/><textarea cols="50" name="amphy" rows="4" id="amphy"></textarea></p>
+<p>
+    <button onclick="myFunction()">GO!</button>
+</p>
 
 <hr/>
 <p id="demo"></p>
 
 <script>
+    function myFunction() {
+        document.getElementById("demo").innerHTML = "";
+        let zera = document.getElementById('zera').value;
+        let mew = document.getElementById('mew').value;
+        let amphy = document.getElementById('amphy').value;
 
-  
+        let zeraArray = [];
+        let mewArray = [];
+        let amphyArray = [];
 
-function myFunction() {
-document.getElementById("demo").innerHTML = "";
-var zera = document.getElementById('zera').value;
-var mew = document.getElementById('mew').value;
-var amphy = document.getElementById('amphy').value;
+        if (zera.length > 0) {
+            zeraArray = zera.split("\n");
+        }
+        if (mew.length > 0) {
+            mewArray = mew.split("\n");
+        }
+        if (amphy.length > 0) {
+            amphyArray = amphy.split("\n");
+        }
+        
+        let zeraOT = [];
+        let mewOT = [];
+        let amphyOT = [];
 
-var zeraArray = []
-var mewArray = []
-var amphyArray = []
-if (zera.length > 0) {
-	zeraArray = zera.split("\n");
-}
-if (mew.length > 0) {
-	mewArray = mew.split("\n");
-}
-if (amphy.length > 0) {
-	amphyArray = amphy.split("\n");
-}
+        let DQ = [];
 
-var zeraOT=[];
-var mewOT=[];
-var amphyOT=[];
+        for (let i = 0; i < zeraArray.length; i++) {
+            if (!zeraArray[i] || zeraArray[i].includes("Pending Trades")) {
+                continue;
+            }
+            if ((zeraArray[i].match(/-/g) || []).length >= 3) {
+                zeraOT.push(zeraArray[i].split("-")[3].trim());
+            } else {
+                zeraOT.push(zeraArray[i].split(",")[0].split(":")[1].trim());
+            }
 
-DQ = [];
+        }
 
-for (let i = 0; i < zeraArray.length; i++) {
-if(zeraArray[i].includes("Pending Trades")){
-continue;
-}
-  zeraOT.push(zeraArray[i].split(",")[0].split(":")[1].trim());
-}
-for (let i = 0; i < mewArray.length; i++) {
-  if(mewArray[i].includes("Pending Trades")){
-	continue;
-  }
-  mewOT.push(mewArray[i].split(",")[0].split(":")[1].trim());
-}
+        for (let i = 0; i < mewArray.length; i++) {
+            if (!mewArray[i] || mewArray[i].includes("Pending Trades")) {
+                continue;
+            }
+            if ((mewArray[i].match(/-/g) || []).length >= 3) {
+                mewOT.push(mewArray[i].split("-")[3].trim());
+            } else {
+                mewOT.push(mewArray[i].split(",")[0].split(":")[1].trim());
+            }
+        }
 
-for (let i = 0; i < amphyArray.length; i++) {
-  if(amphyArray[i].includes("Pending Trades")){
-	continue;
-  }
-  amphyOT.push(amphyArray[i].split(",")[0].split(":")[1].trim());
-}
+        for (let i = 0; i < amphyArray.length; i++) {
+            if (!amphyArray[i] || amphyArray[i].includes("Pending Trades")) {
+                continue;
+            }
+            if ((amphyArray[i].match(/-/g) || []).length >= 3) {
+                amphyOT.push(amphyArray[i].split("-")[3].trim());
+            } else {
+                amphyOT.push(amphyArray[i].split(",")[0].split(":")[1].trim());
+            }
+        }
 
-if (zeraOT.length > 0 && mewOT.length > 0 && amphyOT.length > 0) {
-	for (let i = 0; i < zeraOT.length; i++) {
-  		if (mewOT.includes(zeraOT[i])) {
-  			DQ.push(zeraOT[i]+" \n");
-  		} else if (amphyOT.includes(zeraOT[i])) {
-  			DQ.push(zeraOT[i]+" \n");
-  		} 
-	}
-} else if (zeraOT.length > 0 && mewOT.length > 0) {
-	for (let i = 0; i < zeraOT.length; i++) {
-  		if (mewOT.includes(zeraOT[i])) {
-  			DQ.push(zeraOT[i]+" \n");
-  		} 
-	}
-} else if (amphyOT.length > 0 && mewOT.length > 0) {
-	for (let i = 0; i < amphyOT.length; i++) {
-  		if (mewOT.includes(amphyOT[i])) {
-  			DQ.push(amphyOT[i]+" \n");
-  		} 
-	}
-} else if (zeraOT.length > 0 && amphyOT.length > 0) {
-	for (let i = 0; i < zeraOT.length; i++) {
-  		if (amphyOT.includes(zeraOT[i])) {
-  			DQ.push(zeraOT[i]+" \n");
-  		} 
-	}
-}
-
-	//document.getElementById("demo").innerHTML = zeraOT;
- 	document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n"+DQ;
-}
-</script> 
+        if (zeraOT.length > 0 && mewOT.length > 0 && amphyOT.length > 0) {
+            for (let i = 0; i < zeraOT.length; i++) {
+                if (mewOT.includes(zeraOT[i])) {
+                    DQ.push(zeraOT[i] + " ");
+                } else if (amphyOT.includes(zeraOT[i])) {
+                    DQ.push(zeraOT[i] + " ");
+                }
+            }
+        } else if (zeraOT.length > 0 && mewOT.length > 0) {
+            for (let i = 0; i < zeraOT.length; i++) {
+                if (mewOT.includes(zeraOT[i])) {
+                    DQ.push(zeraOT[i] + " ");
+                }
+            }
+        } else if (amphyOT.length > 0 && mewOT.length > 0) {
+            for (let i = 0; i < amphyOT.length; i++) {
+                if (mewOT.includes(amphyOT[i])) {
+                    DQ.push(amphyOT[i] + " ");
+                }
+            }
+        } else if (zeraOT.length > 0 && amphyOT.length > 0) {
+            for (let i = 0; i < zeraOT.length; i++) {
+                if (amphyOT.includes(zeraOT[i])) {
+                    DQ.push(zeraOT[i] + " ");
+                }
+            }
+        }
+        document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n" + DQ;
+    }
+</script>
 
 </body>
 </html>
