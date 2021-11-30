@@ -30,13 +30,14 @@ var amphyOT=[];
 DQ = [];
 
 for (let i = 0; i < zeraArray.length; i++) {
-  zeraOT[i] = zeraArray[i].split(" ")[1];
+  zeraOT[i] = zeraArray[i].split(",")[0].split(":")[1].trim();
 }
 for (let i = 0; i < mewArray.length; i++) {
-  mewOT[i] = mewArray[i].split(" ")[1];
+  mewOT[i] = mewArray[i].split(",")[0].split(":")[1].trim();
 }
+
 for (let i = 0; i < amphyArray.length; i++) {
-  amphyOT[i] = amphyArray[i].split(" ")[1];
+  amphyOT[i] = amphyArray[i].split(",")[0].split(":")[1].trim();
 }
 
 for (let i = 0; i < zeraOT.length; i++) {
@@ -44,10 +45,17 @@ for (let i = 0; i < zeraOT.length; i++) {
   	DQ.push(zeraOT[i]+"\n");
   } else if (amphyOT.includes(zeraOT[i])) {
   	DQ.push(zeraOT[i]+"\n");
-  }
+  } 
 }
 
-  document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n"+DQ;
+for (let i = 0; i < mewOT.length; i++) {
+  if (amphyOT.includes(mewOT[i])) {
+  	DQ.push(mewOT[i]+"\n");
+  } 
+}
+
+	//document.getElementById("demo").innerHTML = zeraOT;
+ 	document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n"+DQ;
 }
 </script> 
 
