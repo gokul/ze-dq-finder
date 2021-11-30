@@ -4,7 +4,7 @@
 
 <h1>ZE DQ finder 🐍</h1>
 
-<p><label for="zera"><b>ZERA:</b></label><br/><textarea cols="50" name="zera" rows="4" id="zera"></textarea> <br /><br /><label for="mew"><b>MEW:</b></label><br/><textarea cols="50" name="mew" rows="4" id="mew"></textarea> <br /><br /><label for="amphy"><b>AMPHY:</b></label><br/><textarea cols="50" name="amphy" rows="4" id="amphy"></textarea></p>
+<p><label for="zera"><b>Zera</b></label><br/><textarea cols="50" name="zera" rows="4" id="zera"></textarea> <br /><br /><label for="mew"><b>Mew</b></label><br/><textarea cols="50" name="mew" rows="4" id="mew"></textarea> <br /><br /><label for="amphy"><b>Amphy</b></label><br/><textarea cols="50" name="amphy" rows="4" id="amphy"></textarea></p>
 <p><button onclick="myFunction()">GO!</button></p>
 
 <hr/>
@@ -15,13 +15,23 @@
   
 
 function myFunction() {
+document.getElementById("demo").innerHTML = "";
 var zera = document.getElementById('zera').value;
 var mew = document.getElementById('mew').value;
 var amphy = document.getElementById('amphy').value;
 
-const zeraArray = zera.split("\n");
-const mewArray = mew.split("\n");
-const amphyArray = amphy.split("\n");
+var zeraArray = []
+var mewArray = []
+var amphyArray = []
+if (zera.length > 0) {
+	zeraArray = zera.split("\n");
+}
+if (mew.length > 0) {
+	mewArray = mew.split("\n");
+}
+if (amphy.length > 0) {
+	amphyArray = amphy.split("\n");
+}
 
 var zeraOT=[];
 var mewOT=[];
@@ -49,18 +59,32 @@ for (let i = 0; i < amphyArray.length; i++) {
   amphyOT.push(amphyArray[i].split(",")[0].split(":")[1].trim());
 }
 
-for (let i = 0; i < zeraOT.length; i++) {
-  if (mewOT.includes(zeraOT[i])) {
-  	DQ.push(zeraOT[i]+"\n");
-  } else if (amphyOT.includes(zeraOT[i])) {
-  	DQ.push(zeraOT[i]+"\n");
-  } 
-}
-
-for (let i = 0; i < mewOT.length; i++) {
-  if (amphyOT.includes(mewOT[i])) {
-  	DQ.push(mewOT[i]+"\n");
-  } 
+if (zeraOT.length > 0 && mewOT.length > 0 && amphyOT.length > 0) {
+	for (let i = 0; i < zeraOT.length; i++) {
+  		if (mewOT.includes(zeraOT[i])) {
+  			DQ.push(zeraOT[i]+" \n");
+  		} else if (amphyOT.includes(zeraOT[i])) {
+  			DQ.push(zeraOT[i]+" \n");
+  		} 
+	}
+} else if (zeraOT.length > 0 && mewOT.length > 0) {
+	for (let i = 0; i < zeraOT.length; i++) {
+  		if (mewOT.includes(zeraOT[i])) {
+  			DQ.push(zeraOT[i]+" \n");
+  		} 
+	}
+} else if (amphyOT.length > 0 && mewOT.length > 0) {
+	for (let i = 0; i < amphyOT.length; i++) {
+  		if (mewOT.includes(amphyOT[i])) {
+  			DQ.push(amphyOT[i]+" \n");
+  		} 
+	}
+} else if (zeraOT.length > 0 && amphyOT.length > 0) {
+	for (let i = 0; i < zeraOT.length; i++) {
+  		if (amphyOT.includes(zeraOT[i])) {
+  			DQ.push(zeraOT[i]+" \n");
+  		} 
+	}
 }
 
 	//document.getElementById("demo").innerHTML = zeraOT;
