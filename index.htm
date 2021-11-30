@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>ZE DQ finder 🐍</h1>
+
+<p><label for="zera"><b>ZERA:</b></label><br/><textarea cols="50" name="zera" rows="4" id="zera"></textarea> <br /><br /><label for="mew"><b>MEW:</b></label><br/><textarea cols="50" name="mew" rows="4" id="mew"></textarea> <br /><br /><label for="amphy"><b>AMPHY:</b></label><br/><textarea cols="50" name="amphy" rows="4" id="amphy"></textarea></p>
+<p><button onclick="myFunction()">GO!</button></p>
+
+<hr/>
+<p id="demo"></p>
+
+<script>
+
+  
+
+function myFunction() {
+var zera = document.getElementById('zera').value;
+var mew = document.getElementById('mew').value;
+var amphy = document.getElementById('amphy').value;
+
+const zeraArray = zera.split("\n");
+const mewArray = mew.split("\n");
+const amphyArray = amphy.split("\n");
+
+var zeraOT=[];
+var mewOT=[];
+var amphyOT=[];
+
+DQ = [];
+
+for (let i = 0; i < zeraArray.length; i++) {
+  zeraOT[i] = zeraArray[i].split(" ")[1];
+}
+for (let i = 0; i < mewArray.length; i++) {
+  mewOT[i] = mewArray[i].split(" ")[1];
+}
+for (let i = 0; i < amphyArray.length; i++) {
+  amphyOT[i] = amphyArray[i].split(" ")[1];
+}
+
+for (let i = 0; i < zeraOT.length; i++) {
+  if (mewOT.includes(zeraOT[i])) {
+  	DQ.push(zeraOT[i]+"\n");
+  } else if (amphyOT.includes(zeraOT[i])) {
+  	DQ.push(zeraOT[i]+"\n");
+  }
+}
+
+  document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n"+DQ;
+}
+</script> 
+
+</body>
+</html>
