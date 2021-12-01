@@ -2,27 +2,29 @@
 <html>
 <head>
     <title>ZE DQ Finder</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 <!-- BAD CODE IS BAD -->
 
 <h1>ZE DQ finder 🐍</h1>
 
-<h3> for $ql </h3>
+<h3> Compatible with $ql and $tl</h3>
 
 <p><label for="zera"><b>Zera</b></label><br/><textarea cols="50" name="zera" rows="4" id="zera"></textarea>
     <br/><br/><label for="mew"><b>Mew</b></label><br/><textarea cols="50" name="mew" rows="4" id="mew"></textarea> <br/><br/><label
             for="amphy"><b>Amphy</b></label><br/><textarea cols="50" name="amphy" rows="4" id="amphy"></textarea></p>
 <p>
-    <button onclick="myFunction()">GO!</button>
+    <button onclick="detectDQ()">GO!</button>
+    <button onclick="clearAll()">Clear All</button>
 </p>
 
 <hr/>
-<p id="demo"></p>
+<p id="output"></p>
 
 <script>
-    function myFunction() {
-        document.getElementById("demo").innerHTML = "";
+    function detectDQ() {
+        document.getElementById("output").innerHTML = "";
         let zera = document.getElementById('zera').value;
         let mew = document.getElementById('mew').value;
         let amphy = document.getElementById('amphy').value;
@@ -46,6 +48,7 @@
         let amphyOT = [];
 
         let DQ = [];
+        let TQ = [];
 
         for (let i = 0; i < zeraArray.length; i++) {
             if (!zeraArray[i] || zeraArray[i].includes("Pending Trades")) {
@@ -81,40 +84,53 @@
             }
         }
 
-        /*if (zeraOT.length > 0 && mewOT.length > 0 && amphyOT.length > 0) {
+        if (zeraOT.length > 0 && mewOT.length > 0 && amphyOT.length > 0) {
             for (let i = 0; i < zeraOT.length; i++) {
-                if (mewOT.includes(zeraOT[i])) {
-                    DQ.push(zeraOT[i] + " ");
-                } else if (amphyOT.includes(zeraOT[i])) {
-                    DQ.push(zeraOT[i] + " ");
+                if (mewOT.includes(zeraOT[i]) && amphyOT.includes(zeraOT[i])) {
+                    TQ.push(zeraOT[i] + " ");
                 }
             }
-        } else*/
+        }
         if (zeraOT.length > 0 && mewOT.length > 0) {
             for (let i = 0; i < zeraOT.length; i++) {
                 if (mewOT.includes(zeraOT[i])) {
                     DQ.push(zeraOT[i] + " ");
                 }
             }
-        } if (amphyOT.length > 0 && mewOT.length > 0) {
+        }
+        if (amphyOT.length > 0 && mewOT.length > 0) {
             for (let i = 0; i < amphyOT.length; i++) {
                 if (mewOT.includes(amphyOT[i])) {
                     DQ.push(amphyOT[i] + " ");
                 }
             }
-        } if (zeraOT.length > 0 && amphyOT.length > 0) {
+        }
+        if (zeraOT.length > 0 && amphyOT.length > 0) {
             for (let i = 0; i < zeraOT.length; i++) {
                 if (amphyOT.includes(zeraOT[i])) {
                     DQ.push(zeraOT[i] + " ");
                 }
             }
         }
+
         let DQSet = [...new Set(DQ)];
         if (DQSet.length > 0) {
-            document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n" + DQSet;
+            if (TQ.length > 0) {
+                document.getElementById("output").innerHTML = "<h3>Double queuers:</h3>\n" + DQSet +
+                    "\n\n<h3>Triple queuers:</h3>\n" + TQ;
+            } else {
+                document.getElementById("output").innerHTML = "<h3>Double queuers:</h3>\n" + DQSet;
+            }
         } else {
-            document.getElementById("demo").innerHTML = "<h3>No double queuers found.</h3>\n";
+            document.getElementById("output").innerHTML = "<h3>No double queuers found.</h3>\n";
         }
+    }
+
+    function clearAll() {
+        document.getElementById('zera').value = "";
+        document.getElementById('mew').value = "";
+        document.getElementById('amphy').value = "";
+        document.getElementById("output").innerHTML = "";
     }
 </script>
 
