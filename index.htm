@@ -40,7 +40,7 @@
         if (amphy.length > 0) {
             amphyArray = amphy.split("\n");
         }
-        
+
         let zeraOT = [];
         let mewOT = [];
         let amphyOT = [];
@@ -81,7 +81,7 @@
             }
         }
 
-        if (zeraOT.length > 0 && mewOT.length > 0 && amphyOT.length > 0) {
+        /*if (zeraOT.length > 0 && mewOT.length > 0 && amphyOT.length > 0) {
             for (let i = 0; i < zeraOT.length; i++) {
                 if (mewOT.includes(zeraOT[i])) {
                     DQ.push(zeraOT[i] + " ");
@@ -89,26 +89,32 @@
                     DQ.push(zeraOT[i] + " ");
                 }
             }
-        } else if (zeraOT.length > 0 && mewOT.length > 0) {
+        } else*/
+        if (zeraOT.length > 0 && mewOT.length > 0) {
             for (let i = 0; i < zeraOT.length; i++) {
                 if (mewOT.includes(zeraOT[i])) {
                     DQ.push(zeraOT[i] + " ");
                 }
             }
-        } else if (amphyOT.length > 0 && mewOT.length > 0) {
+        } if (amphyOT.length > 0 && mewOT.length > 0) {
             for (let i = 0; i < amphyOT.length; i++) {
                 if (mewOT.includes(amphyOT[i])) {
                     DQ.push(amphyOT[i] + " ");
                 }
             }
-        } else if (zeraOT.length > 0 && amphyOT.length > 0) {
+        } if (zeraOT.length > 0 && amphyOT.length > 0) {
             for (let i = 0; i < zeraOT.length; i++) {
                 if (amphyOT.includes(zeraOT[i])) {
                     DQ.push(zeraOT[i] + " ");
                 }
             }
         }
-        document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n" + DQ;
+        let DQSet = [...new Set(DQ)];
+        if (DQSet.length > 0) {
+            document.getElementById("demo").innerHTML = "<h3>Double queuers:</h3>\n" + DQSet;
+        } else {
+            document.getElementById("demo").innerHTML = "<h3>No double queuers found.</h3>\n";
+        }
     }
 </script>
 
